@@ -32,8 +32,8 @@ func TestLoadPositions(t *testing.T) {
 		if err == nil {
 			t.Errorf("Expected an error")
 		}
-		if err.Error() != "open destinations/1.txt: no such file or directory" {
-			t.Errorf("Expected an error: 'open destinations/1.txt: no such file or directory', got: %v", err.Error())
+		if err.Error() != "open destinations/5.txt: no such file or directory" {
+			t.Errorf("Expected an error: 'open destinations/5.txt: no such file or directory', got: %v", err.Error())
 		}
 	})
 
