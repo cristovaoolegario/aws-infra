@@ -23,3 +23,5 @@ kafka-console-consumer --bootstrap-server=localhost:9092 --topic=readtest
 ```shell
 kafka-console-producer --bootstrap-server=localhost:9092 --topic=readtest
 ```
+
+{"clientId":"1", "routeId":"1"}
