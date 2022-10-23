@@ -183,3 +183,6 @@ dist
 
 # Go workspace file
 go.work
+
+*/.docker/dbdata
+*/.history

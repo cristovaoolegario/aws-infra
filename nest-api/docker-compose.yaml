@@ -1,4 +1,4 @@
-version: '3'
+version: '4.0'
 
 services:
   app:
@@ -8,3 +8,38 @@ services:
       - 3000:3000
     volumes:
       - .:/home/node/app
+    extra_hosts:
+      - 'host.docker.internal:172.17.0.1'
+    depends_on:
+      - db
+
+  db:
+    image: mongo:4.4.4
+    restart: always
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=root
+      - MONGO_INITDB_DATABASE=nest
+    ports:
+      - 27017:27017
+    extra_hosts:
+      - 'host.docker.internal:172.17.0.1'
+    volumes:
+      - ./.docker/mongo:/docker-entrypoint-initdb.d:ro
+      - ./.docker/dbdata:/data
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=db
+      - ME_CONFIG_MONGODB_AUTH_USERNAME=root
+      - ME_CONFIG_MONGODB_AUTH_PASSWORD=root
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=root
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=root
+    depends_on:
+      - db
+    extra_hosts:
+      - 'host.docker.internal:172.17.0.1'
